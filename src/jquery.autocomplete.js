@@ -416,11 +416,7 @@
                         return;
                     }
                     break;
-                case keys.RETURN:
-                    if (that.selectedIndex === -1) {
-                        that.hide();
-                        return;
-                    }
+                case keys.RETURN:                    
                     that.select(that.selectedIndex);
                     break;
                 case keys.UP:
@@ -930,7 +926,12 @@
                 onSelectCallback = that.options.onSelect,
                 suggestion = that.suggestions[index];
 
-            that.currentValue = that.getValue(suggestion.value);
+            if (suggestion) {
+                that.currentValue = that.getValue(suggestion.value);
+            }
+            else {
+                that.currentValue = null;
+            }
 
             if (that.currentValue !== that.el.val() && !that.options.preserveInput) {
                 that.el.val(that.currentValue);
